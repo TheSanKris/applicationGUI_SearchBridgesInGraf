@@ -14,15 +14,24 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using FiindBrigeInGraf;
 
 namespace FiindBrigeInGraf
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
+    /// 
+    public enum Flags
+    {
+        NEXT,
+        NO_BRIDGE,
+        IS_BRIDGE,
+        END
+    }
     public partial class MainWindow : Window
     {
+       
+
         bool rButtonCan = false;
         bool rebroCan = false;
         bool RB_getCoords = false;
@@ -48,13 +57,7 @@ namespace FiindBrigeInGraf
             
         }
 
-        private void NextStep_Click(object sender, RoutedEventArgs e)
-        {
-            if (da == 0)
-                graf.Init(rebroPairs);
-            da++;
-            graf.NextStep();
-        }
+        
 
         void CreateRButtonOnCanvas() 
         {
@@ -231,15 +234,133 @@ namespace FiindBrigeInGraf
             
 
             
-        }        
+        }
+
+        public void ChangeColor(Flags flag, Canvas canvas)
+        {
+            MyPair myPair = graf.m_mpThisRebro;
+            int a = myPair.first;
+            int b = myPair.second;
+            List <int[]> ints = new List <int[]>();
+            switch (flag)
+            {
+                case Flags.NEXT:
+                    
+                    foreach (Button button in canvas.Children.OfType<Button>().ToList())
+                    {
+                        if (Convert.ToInt32(button.Content) == a)
+                        {
+                            button.Background = new SolidColorBrush(System.Windows.Media.Color.FromArgb(100, 128, 128, 128));
+                        }
+                        else if (Convert.ToInt32(button.Content) == b)
+                        {
+                            button.Background = new SolidColorBrush(System.Windows.Media.Color.FromArgb(100, 128, 128, 128));
+
+                        }
+                    }
+                    foreach(Line line in canvas.Children.OfType<Line>().ToList())
+                    {
+                        if(line.DataContext == myPair)
+                        {
+                            line.Stroke = new SolidColorBrush(System.Windows.Media.Color.FromArgb(100, 128, 128, 128));
+                            break;
+                        }
+                    }
+                    int[] ab = { a, b };
+                    ints.Add(ab);
+                    break;
+                case Flags.NO_BRIDGE:
+                    foreach (int[] i in ints)
+                    {
+                        foreach (Button button in canvas.Children.OfType<Button>().ToList())
+                        {
+                            if (Convert.ToInt32(button.Content) == i[0])
+                            {
+                                button.Background = new SolidColorBrush(System.Windows.Media.Color.FromArgb(100, 0, 130, 255));
+                            }
+                            else if (Convert.ToInt32(button.Content) == i[b])
+                            {
+                                button.Background = new SolidColorBrush(System.Windows.Media.Color.FromArgb(100, 0, 130, 255));
+
+                            }
+                        }
+                        foreach (Line line in canvas.Children.OfType<Line>().ToList())
+                        {
+                            MyPair pair = new MyPair();
+                            pair.Insert(i[0], i[1]);
+                            if (line.DataContext == pair)
+                            {
+                                line.Stroke = new SolidColorBrush(System.Windows.Media.Color.FromArgb(100, 0, 130, 255));
+                                break;
+                            }
+                        }
+                    }
+                    
+                    break;
+                case Flags.IS_BRIDGE:
+                    foreach (Line line in canvas.Children.OfType<Line>().ToList())
+                    {
+                        if (line.DataContext == myPair)
+                        {
+                            line.Stroke = new SolidColorBrush(System.Windows.Media.Color.FromArgb(100, 255, 0, 0));
+                            break;
+                        }
+                    }
+                    break;
+            }
+        }
+
+        private void BackStep_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private void NextStep_Click(object sender, RoutedEventArgs e)
+        {
+            if (da == 0)
+                graf.Init(rebroPairs);
+            da++;
+            Flags flag = graf.NextStep();
+            ChangeColor(flag, canvas);
+        }
+        private void buttonA_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void incrA_Click(object sender, RoutedEventArgs e)
+        {
+            int x = Convert.ToInt32(chetchik.Text.ToString());
+            if (x < 50000)
+            {
+                x+=100;
+            }
+
+            chetchik.Text = Convert.ToString(x);
+        }
+
+        private void decrA_Click(object sender, RoutedEventArgs e)
+        {
+            int x = Convert.ToInt32(chetchik.Text.ToString());
+            if (x > 0)
+            {
+                x-=100;
+            }
+            chetchik.Text = Convert.ToString(x);
+
+        }
+
+        private void chetchikA_KeyUp(object sender, KeyEventArgs e)
+        {
+
+        }
     }
 }
 
 /* 
  * Создвать линии за кнопкой
- * Короче, линии можно создавать от границы кнопки, главное учитыаеть расположение кнопок относительно друг друга
  * 
- * 
- * Собирать инфу для Сани +
- * 
+ * Сделать кнопки для шагов алгоритма и для автоматического прохода
+ * Сделать функции для изменения цвета ребра и вершины относительно флага
+ * Механизм для шага назад
+ * Сдлеть так, чтобы все вершины были соединены ребрами
  * */

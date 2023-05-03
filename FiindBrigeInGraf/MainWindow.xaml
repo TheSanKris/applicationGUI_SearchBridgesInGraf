@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FiindBrigeInGraf"
         mc:Ignorable="d"
-        Title="MainWindow" MinWidth="800" MinHeight="450" MaxHeight="450" MaxWidth="800">
+        Title="MainWindow" MinWidth="800" MinHeight="600" MaxHeight="600" MaxWidth="800">
     
     <Grid x:Name="grid">
         <Grid.ColumnDefinitions>
@@ -26,7 +26,7 @@
         </Grid>
         <Grid Grid.Column="1">
             <Grid.RowDefinitions>
-                <RowDefinition Height="200"/>
+                <RowDefinition/>
                 <RowDefinition/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
@@ -49,7 +49,6 @@
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <Button x:Name="Clear" Content="C" FontSize="32" FontWeight="Bold" Style="{StaticResource ButtonsStyle}" Click="Clear_Click"/>
-                        <Button x:Name="NextStep" Content="->" FontSize="32" FontWeight="Bold" Style="{StaticResource ButtonsStyle}" Click="NextStep_Click"/>
                     </StackPanel>
                     
                 </StackPanel>
@@ -69,6 +68,27 @@
                 </StackPanel>
 
             </Grid>
+
+            <StackPanel Grid.Row="1" Orientation="Vertical">
+                <TextBlock Text="Авто-ход" Style="{StaticResource TextBlocksStyle}" HorizontalAlignment="Center"/>
+                <StackPanel Orientation="Horizontal" Margin="0 20 0 0" >
+                    <TextBox x:Name="chetchikA" Text="0" Width="200" Height="50" VerticalAlignment="Bottom" FontSize="24" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"  Keyboard.KeyUp="chetchikA_KeyUp" Margin="30 0 0 0"/>
+                    <StackPanel Orientation="Vertical" VerticalAlignment="Bottom">
+                        <Button x:Name="incrA" Width="25" Height="25" Content="▲" Click="incrA_Click"/>
+                        <Button x:Name="decrA" Width="25" Height="25" Content="▼" Click="decrA_Click"/>
+                    </StackPanel>
+                    <TextBlock Style="{StaticResource TextBlocksStyle}" Margin="10 0 0 0" TextWrapping="Wrap" Width="80" VerticalAlignment="Center"><Run Language="ru-ru" Text="Задержка"/></TextBlock>
+                </StackPanel>
+                <Button x:Name="buttonA" Width="260" Height="30" Margin="0 20 0 0" Content="Старт" HorizontalAlignment="Center" Click="buttonA_Click"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Vertical" Grid.Row="2">
+                <TextBlock Text="Шаг за шагом" Style="{StaticResource TextBlocksStyle}" HorizontalAlignment="Center"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Button x:Name="BackStep" Content="&lt;-" FontSize="32" FontWeight="Bold" Style="{StaticResource ButtonsStyle}" Click="BackStep_Click" Margin="0 20 0 0"/>
+                    <Button x:Name="NextStep" Content="->" FontSize="32" FontWeight="Bold" Style="{StaticResource ButtonsStyle}" Click="NextStep_Click"/>
+                </StackPanel>
+            </StackPanel>
 
 
         </Grid>
