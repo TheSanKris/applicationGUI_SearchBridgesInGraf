@@ -23,9 +23,6 @@ namespace FiindBrigeInGraf
 
         public Flags NextStep()
         {
-            if ((m_mpGrafPairs.Count() == 0) && (m_mpBufferPairs.Count() != 0))
-                Init(m_mpBufferPairs);
-
             if (m_mpGrafPairs.Count() == 0)
                 return Flags.END;
             m_mpBridgeRebra.Clear();
@@ -51,14 +48,24 @@ namespace FiindBrigeInGraf
 
                 case Flags.NO_BRIDGE:
                     DeleteData(pair, flag);
-
+                    foreach (var obj in m_mpBufferPairs)
+                    {
+                        m_mpGrafPairs.Insert(0, obj);
+                    }
+                    ClearFathers();
+                    m_mpBufferPairs.Clear();
                     //
                     return Flags.NO_BRIDGE;
                     break;
 
                 case Flags.IS_BRIDGE:
                     DeleteData(pair, flag);
-
+                    foreach (var obj in m_mpBufferPairs)
+                    {
+                        m_mpGrafPairs.Insert(0, obj);
+                    }
+                    ClearFathers();
+                    m_mpBufferPairs.Clear();
                     //
                     return Flags.IS_BRIDGE;
                     break;
@@ -74,10 +81,12 @@ namespace FiindBrigeInGraf
         private Flags GetStatus(MyPair pair)
         {
             int search_number = pair.second;
-            if (!IsFork(search_number))
-                return Flags.IS_BRIDGE;
+            MyPair tmp = FindPair(search_number);
             if (IsRebroToFork(pair))
                 return Flags.NO_BRIDGE;
+            if (tmp == null)
+                return Flags.IS_BRIDGE;
+            
 
             return Flags.NEXT;
         }
@@ -145,26 +154,26 @@ namespace FiindBrigeInGraf
                         da++;
                     if (da > 1)
                         break;
-                    m_mpGrafPairs.Remove(m_mpBufferPairs.Last());
                     m_mpNoBridgeRebra.Add(m_mpBufferPairs.Last());
                     m_mpBufferPairs.Remove(m_mpBufferPairs.Last());
 
                 }
                 while (true)
                 {
-                    if ((m_NumbersForks.Last() == number_fork) && (m_NumberFathers.Last() == number_fork))
+                    if (m_NumbersForks.Last() == number_fork)
                     {
                         if (m_NumbersForks.Last() == number_fork)
                             m_NumbersForks.Remove(m_NumbersForks.Last());
+                        int tmp = m_NumberFathers.Last();
+                        m_NumberFathers.Reverse();
+                        m_NumberFathers.Remove(tmp);
+                        m_NumberFathers.Reverse();
                         break;
                     }
 
-                    if (m_NumbersForks.Last() != number_fork)
-                        m_NumbersForks.Remove(m_NumbersForks.Last());
+                    m_NumbersForks.Remove(m_NumbersForks.Last());
 
                 }
-                ClearFathers();
-
             }
             else
             {
@@ -172,11 +181,8 @@ namespace FiindBrigeInGraf
                 m_mpGrafPairs.Remove(pair);
                 m_mpBufferPairs.Remove(pair);
                 int number_fork = pair.first;
-
-                if (m_NumbersForks.Last() != number_fork)
-                    m_NumbersForks.Remove(m_NumbersForks.Last());
-                if (m_NumberFathers.Last() != number_fork)
-                    m_NumberFathers.Remove(m_NumberFathers.Last());
+                m_NumbersForks.Remove(m_NumbersForks.Last());
+                m_NumberFathers.Remove(m_NumberFathers.Last());
 
             }
         }

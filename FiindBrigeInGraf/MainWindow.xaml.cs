@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Metrics;
 using System.Drawing;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -30,13 +32,13 @@ namespace FiindBrigeInGraf
     }
     public partial class MainWindow : Window
     {
-       
+
 
         bool rButtonCan = false;
         bool rebroCan = false;
         bool RB_getCoords = false;
 
-        int countRButton =0;
+        int countRButton = 0;
         int a = 0;
         int b = 0;
         List<MyPair> rebroPairs = new List<MyPair>();
@@ -46,39 +48,41 @@ namespace FiindBrigeInGraf
         Graf graf = new Graf();
         int da = 0;
 
+        Flags flag;
+
         ClassButtonCreate buttonCreate = new ClassButtonCreate();
         ClassLineCreate lineCreate = new ClassLineCreate();
-        
+
         // просто создай кнопку для пошагового поиска и другую для автоматического
 
         public MainWindow()
         {
-            InitializeComponent();            
-            
+            InitializeComponent();
+
         }
 
-        
 
-        void CreateRButtonOnCanvas() 
+
+        void CreateRButtonOnCanvas()
         {
             Button rButton = new Button
             {
                 Height = 30,
                 Width = 30,
-                Background = new SolidColorBrush(System.Windows.Media.Color.FromArgb( 50, 0, 245, 215))
-                
+                Background = new SolidColorBrush(System.Windows.Media.Color.FromArgb(50, 0, 245, 215))
+
             };
             rButton.Click += RoundButton_Click;
             ++countRButton;
             rButton.Content = countRButton;
             rButton.Template = (ControlTemplate)Application.Current.Resources["ellipseButton"];
             System.Windows.Point p = Mouse.GetPosition(canvas);
-            buttonCreate.CreateRButton(p,  canvas, rButton);
+            buttonCreate.CreateRButton(p, canvas, rButton);
 
-            
-            
+
+
         }
-        
+
         private void obj_Click(object sender, RoutedEventArgs e)
         {
             rButtonCan = true;
@@ -91,7 +95,7 @@ namespace FiindBrigeInGraf
         }
         private void canvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if (rButtonCan & canvas.Children.OfType<Button>().ToList().Count()<50)
+            if (rButtonCan & canvas.Children.OfType<Button>().ToList().Count() < 50)
             {
                 CreateRButtonOnCanvas();
             }
@@ -118,11 +122,11 @@ namespace FiindBrigeInGraf
                     {
                         lineCreate.CreateRebro(coordsLine, canvas, rebroPairs, a, b);
                     }
-                    
+
 
                 }
             }
-       
+
         }
 
         private void incr_Click(object sender, RoutedEventArgs e)
@@ -132,14 +136,14 @@ namespace FiindBrigeInGraf
             {
                 x++;
             }
-            
+
             chetchik.Text = Convert.ToString(x);
         }
 
         private void decr_Click(object sender, RoutedEventArgs e)
         {
             int x = Convert.ToInt32(chetchik.Text.ToString());
-            if (x > 0) 
+            if (x > 0)
             {
                 x--;
             }
@@ -157,7 +161,7 @@ namespace FiindBrigeInGraf
             List<Button> buttonList = canvas.Children.OfType<Button>().ToList();
 
             lineCreate.RecursCreateRebroRand(buttonList, buttonList.Count, canvas, rebroPairs);
-            foreach (var b  in canvas.Children.OfType<Button>().ToList()) 
+            foreach (var b in canvas.Children.OfType<Button>().ToList())
             {
                 info.Text = info.Text + b.Content.ToString();
             }
@@ -168,7 +172,10 @@ namespace FiindBrigeInGraf
         }
         void Recurs(int i)
         {
-            Button rButton = new Button { Width = 30, Height = 30,
+            Button rButton = new Button
+            {
+                Width = 30,
+                Height = 30,
                 Background = new SolidColorBrush(System.Windows.Media.Color.FromArgb(50, 0, 245, 215))
             };
             rButton.Template = (ControlTemplate)Application.Current.Resources["ellipseButton"];
@@ -177,10 +184,10 @@ namespace FiindBrigeInGraf
             rButton.Content = countRButton;
             if (i == 0)
             {
-                
+
                 countRButton--;
                 return;
-                
+
             }
             else
             {
@@ -197,6 +204,7 @@ namespace FiindBrigeInGraf
             rButtonCan = false;
             rebroCan = false;
             RB_getCoords = false;
+            da = 0;
 
             countRButton = 0;
             a = 0;
@@ -210,7 +218,7 @@ namespace FiindBrigeInGraf
         {
             string text = chetchik.Text.ToString();
             int x = 0;
-            if (text != "" & text !="-")
+            if (text != "" & text != "-")
             {
                 try
                 {
@@ -231,22 +239,23 @@ namespace FiindBrigeInGraf
                     }
                 }
             }
-            
 
-            
+
+
         }
+
 
         public void ChangeColor(Flags flag, Canvas canvas)
         {
             MyPair myPair = graf.m_mpThisRebro;
-            int a = myPair.first;
-            int b = myPair.second;
-            List <int[]> ints = new List <int[]>();
+/*            int a = myPair.first;
+            int b = myPair.second;*/
+
             switch (flag)
             {
                 case Flags.NEXT:
-                    
-                    foreach (Button button in canvas.Children.OfType<Button>().ToList())
+
+                   /* foreach (Button button in canvas.Children.OfType<Button>().ToList())
                     {
                         if (Convert.ToInt32(button.Content) == a)
                         {
@@ -257,55 +266,72 @@ namespace FiindBrigeInGraf
                             button.Background = new SolidColorBrush(System.Windows.Media.Color.FromArgb(100, 128, 128, 128));
 
                         }
-                    }
-                    foreach(Line line in canvas.Children.OfType<Line>().ToList())
+                    }*/
+                    foreach (Line line in canvas.Children.OfType<Line>().ToList())
                     {
-                        if(line.DataContext == myPair)
+                        MyPair da = line.DataContext as MyPair;
+                        if (da == myPair)
+                        {
+                            line.Stroke = new SolidColorBrush(System.Windows.Media.Color.FromArgb(100, 128, 128, 128));
+                            break;
+                        }
+                        MyPair tmp = new MyPair();
+                        tmp.Insert(myPair.second, myPair.first);
+                        if((tmp.first == da.first) && (tmp.second == da.second))
                         {
                             line.Stroke = new SolidColorBrush(System.Windows.Media.Color.FromArgb(100, 128, 128, 128));
                             break;
                         }
                     }
-                    int[] ab = { a, b };
-                    ints.Add(ab);
                     break;
                 case Flags.NO_BRIDGE:
-                    foreach (int[] i in ints)
+                    foreach (MyPair myPair1 in graf.m_mpNoBridgeRebra)
                     {
-                        foreach (Button button in canvas.Children.OfType<Button>().ToList())
+                        /*foreach (Button button in canvas.Children.OfType<Button>().ToList())
                         {
                             if (Convert.ToInt32(button.Content) == i[0])
                             {
                                 button.Background = new SolidColorBrush(System.Windows.Media.Color.FromArgb(100, 0, 130, 255));
                             }
-                            else if (Convert.ToInt32(button.Content) == i[b])
+                            else if (Convert.ToInt32(button.Content) == i[1])
                             {
                                 button.Background = new SolidColorBrush(System.Windows.Media.Color.FromArgb(100, 0, 130, 255));
 
                             }
-                        }
+                        }*/
+
                         foreach (Line line in canvas.Children.OfType<Line>().ToList())
                         {
-                            MyPair pair = new MyPair();
-                            pair.Insert(i[0], i[1]);
-                            if (line.DataContext == pair)
+                            MyPair da = line.DataContext as MyPair;
+                            if ((myPair1.first == da.first) && (myPair1.second == da.second))
                             {
-                                line.Stroke = new SolidColorBrush(System.Windows.Media.Color.FromArgb(100, 0, 130, 255));
+                                line.Stroke = new SolidColorBrush(System.Windows.Media.Color.FromArgb(200, 0, 255, 255));
                                 break;
                             }
+                            MyPair tmp = new MyPair();
+                            tmp.Insert(myPair.second, myPair.first);
+                            if ((myPair1.second == da.first) && (myPair1.first == da.second))
+                            {
+                                line.Stroke = new SolidColorBrush(System.Windows.Media.Color.FromArgb(200, 0, 255, 255));
+                                break;
+                            }
+
                         }
                     }
-                    
+
                     break;
                 case Flags.IS_BRIDGE:
                     foreach (Line line in canvas.Children.OfType<Line>().ToList())
                     {
                         if (line.DataContext == myPair)
                         {
-                            line.Stroke = new SolidColorBrush(System.Windows.Media.Color.FromArgb(100, 255, 0, 0));
+                            line.Stroke = new SolidColorBrush(System.Windows.Media.Color.FromArgb(200, 255, 0, 0));
                             break;
                         }
                     }
+                    break;
+                case Flags.END:
+                    NextStep.IsEnabled = false;
                     break;
             }
         }
@@ -316,14 +342,29 @@ namespace FiindBrigeInGraf
         }
         private void NextStep_Click(object sender, RoutedEventArgs e)
         {
+            GrafProhd();
+        }
+
+        public Flags GrafProhd()
+        {
             if (da == 0)
                 graf.Init(rebroPairs);
             da++;
             Flags flag = graf.NextStep();
             ChangeColor(flag, canvas);
+            return flag;
         }
+
         private void buttonA_Click(object sender, RoutedEventArgs e)
         {
+
+            int x = Convert.ToInt32(chetchik.Text.ToString());
+            while (flag != Flags.END)
+            {
+                flag = GrafProhd();
+                Thread.Sleep(x);
+            }
+           
 
         }
 
@@ -332,10 +373,10 @@ namespace FiindBrigeInGraf
             int x = Convert.ToInt32(chetchik.Text.ToString());
             if (x < 50000)
             {
-                x+=100;
+                x += 100;
             }
 
-            chetchik.Text = Convert.ToString(x);
+            chetchikA.Text = Convert.ToString(x);
         }
 
         private void decrA_Click(object sender, RoutedEventArgs e)
@@ -343,15 +384,37 @@ namespace FiindBrigeInGraf
             int x = Convert.ToInt32(chetchik.Text.ToString());
             if (x > 0)
             {
-                x-=100;
+                x -= 100;
             }
-            chetchik.Text = Convert.ToString(x);
+            chetchikA.Text = Convert.ToString(x);
 
         }
 
         private void chetchikA_KeyUp(object sender, KeyEventArgs e)
         {
-
+            string text = chetchikA.Text.ToString();
+            int x = 0;
+            if (text != "" & text != "-")
+            {
+                try
+                {
+                    x = Convert.ToInt32(text);
+                }
+                finally
+                {
+                    x = Convert.ToInt32(text);
+                    if (x > 10000)
+                    {
+                        x = 10000;
+                        chetchikA.Text = x.ToString();
+                    }
+                    else if (x < 0)
+                    {
+                        x = 0;
+                        chetchikA.Text = x.ToString();
+                    }
+                }
+            }
         }
     }
 }

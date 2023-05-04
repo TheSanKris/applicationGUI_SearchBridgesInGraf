@@ -72,7 +72,7 @@
             <StackPanel Grid.Row="1" Orientation="Vertical">
                 <TextBlock Text="Авто-ход" Style="{StaticResource TextBlocksStyle}" HorizontalAlignment="Center"/>
                 <StackPanel Orientation="Horizontal" Margin="0 20 0 0" >
-                    <TextBox x:Name="chetchikA" Text="0" Width="200" Height="50" VerticalAlignment="Bottom" FontSize="24" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"  Keyboard.KeyUp="chetchikA_KeyUp" Margin="30 0 0 0"/>
+                    <TextBox x:Name="chetchikA" Text="1000" Width="200" Height="50" VerticalAlignment="Bottom" FontSize="24" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"  Keyboard.KeyUp="chetchikA_KeyUp" Margin="30 0 0 0"/>
                     <StackPanel Orientation="Vertical" VerticalAlignment="Bottom">
                         <Button x:Name="incrA" Width="25" Height="25" Content="▲" Click="incrA_Click"/>
                         <Button x:Name="decrA" Width="25" Height="25" Content="▼" Click="decrA_Click"/>
