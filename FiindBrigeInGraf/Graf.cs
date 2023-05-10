@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using System.Windows.Media.Animation;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace FiindBrigeInGraf
 {
@@ -48,6 +50,7 @@ namespace FiindBrigeInGraf
 
                 case Flags.NO_BRIDGE:
                     DeleteData(pair, flag);
+                    AddNumberNoRebra();
                     foreach (var obj in m_mpBufferPairs)
                     {
                         m_mpGrafPairs.Insert(0, obj);
@@ -84,7 +87,7 @@ namespace FiindBrigeInGraf
             MyPair tmp = FindPair(search_number);
             if (IsRebroToFork(pair))
                 return Flags.NO_BRIDGE;
-            if (tmp == null)
+            if ((tmp == null) )
                 return Flags.IS_BRIDGE;
             
 
@@ -136,7 +139,10 @@ namespace FiindBrigeInGraf
             foreach (var gr in m_NumbersForks)
             {
                 if (pair.second == gr)
+                {
                     return true;
+                }
+                    
             }
 
             return false;
@@ -158,22 +164,12 @@ namespace FiindBrigeInGraf
                     m_mpBufferPairs.Remove(m_mpBufferPairs.Last());
 
                 }
-                while (true)
-                {
-                    if (m_NumbersForks.Last() == number_fork)
-                    {
-                        if (m_NumbersForks.Last() == number_fork)
-                            m_NumbersForks.Remove(m_NumbersForks.Last());
-                        int tmp = m_NumberFathers.Last();
-                        m_NumberFathers.Reverse();
-                        m_NumberFathers.Remove(tmp);
-                        m_NumberFathers.Reverse();
-                        break;
-                    }
 
-                    m_NumbersForks.Remove(m_NumbersForks.Last());
+                int tmp = m_NumberFathers.Last();
+                m_NumberFathers.Reverse();
+                m_NumberFathers.Remove(tmp);
+                m_NumberFathers.Reverse();
 
-                }
             }
             else
             {
@@ -189,12 +185,48 @@ namespace FiindBrigeInGraf
 
         private void ClearFathers()
         {
-            foreach(var obj in m_NumberFathers.ToList())
+            MyPair tmp = new MyPair();
+            List<MyPair> copy = new List<MyPair>();
+            foreach (var g in m_mpGrafPairs)
             {
-                MyPair tmp = FindPair(obj);
+                copy.Add(g);
+            }
+            foreach (var obj in m_NumberFathers.ToList())
+            {
+                
+
+                tmp = FindPairSecond(obj, copy);
+                if (tmp != null)
+                    RemovePaireSecond(tmp, copy);
+                
+
                 if (tmp == null)
                     m_NumberFathers.Remove(obj);
             }
+
+        }
+
+        private MyPair FindPairSecond(int number, List<MyPair> list)
+        {
+            MyPair result = list.Find(parr => parr.first == number);
+            if (result != null)
+            {
+                return result;
+            }
+
+            result = list.Find(parr => parr.second == number);
+            if (result != null)
+            {
+                MyPair pair = new MyPair();
+                pair.Insert(result.second, result.first); //Переворот пары (тк идеалогия: (родитель, потомок)
+                list.Add(pair);
+                list.Remove(result);
+                result = pair;
+
+                return result;
+            }
+
+            return null;
 
         }
 
@@ -204,6 +236,29 @@ namespace FiindBrigeInGraf
             MyPair tmp = new MyPair();
             tmp.Insert(pair.second, pair.first);
             m_mpGrafPairs.Remove(tmp);
+        }
+
+        private void RemovePaireSecond(MyPair pair, List<MyPair> list)
+        {
+            list.Remove(pair);
+            MyPair tmp = new MyPair();
+            tmp.Insert(pair.second, pair.first);
+            list.Remove(tmp);
+        }
+
+        public static List<T> removeDuplicates<T>(List<T> list)
+        {
+            return new HashSet<T>(list).ToList();
+        }
+        private void AddNumberNoRebra()
+        {
+            foreach(var obj in m_mpNoBridgeRebra)
+            {
+                m_NumberNoRebra.Add(obj.first);
+                m_NumberNoRebra.Add(obj.second);
+            }
+            m_NumberNoRebra = removeDuplicates(m_NumberNoRebra);
+
         }
 
         public List<MyPair> m_mpNoBridgeRebra = new List<MyPair>();
@@ -217,9 +272,10 @@ namespace FiindBrigeInGraf
 
         private List<int> m_NumbersForks = new List<int>();
         private List<int> m_NumberFathers = new List<int>();
-        
-       
-        
+        private List<int> m_NumberNoRebra = new List<int>();
+
+
+
 
     }
 }
