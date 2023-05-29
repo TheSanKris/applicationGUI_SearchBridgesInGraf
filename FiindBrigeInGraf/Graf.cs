@@ -14,265 +14,286 @@ namespace FiindBrigeInGraf
     {
         public void Init(List<MyPair> data)
         {
-            m_mpGrafPairs = data;
-            m_mpCopyPairs.Clear();
-            foreach (var obj in m_mpGrafPairs) //Пошёл в жопу эттот С# со своей передачей ссылок (или указателей), сука
-            {
-                m_mpCopyPairs.Add(obj);
-            }
-            m_NumberFathers.Add(1);
+            m_mpGrafRebra = data;
+            int number = 1;
+            m_intStoryOfFathers.Add(number);
+
         }
 
         public Flags NextStep()
         {
-            if (m_mpGrafPairs.Count() == 0)
-                return Flags.END;
-            m_mpBridgeRebra.Clear();
             m_mpNoBridgeRebra.Clear();
+            m_mpBridgeRebra.Clear();
 
-            int search_number = m_NumberFathers.Last(); //Поиск ребра, где это число родитель
-            MyPair pair = FindPair(search_number);
-            m_mpThisRebro = pair;
-            m_mpBufferPairs.Add(pair);
-            if (IsFork(search_number))
-                if ((m_NumbersForks.Count() == 0) || (m_NumbersForks.Last() != search_number))
-                    m_NumbersForks.Add(search_number);
-            RemovePair(m_RemovePair);
-            Flags flag = GetStatus(pair);
-            m_NumberFathers.Add(pair.second);
-            switch (flag)
+            if (m_mpGrafRebra.Count() == 0)
+                return Flags.END;
+
+            int father = m_intStoryOfFathers.Last();
+            MyPair m_mpRebro = FindRebro(father);
+            m_mpThisRebro = m_mpRebro;
+
+            m_mpGrafRebra.Remove(m_mpRebro);
+            MyPair tmp = new MyPair();
+            tmp.first = m_mpRebro.second;
+            tmp.second = m_mpRebro.first;
+            m_mpGrafRebra.Remove(tmp);
+
+            m_mpStoryOfWay.Add(m_mpRebro);
+            m_intStoryOfFathers.Add(m_mpRebro.second);
+
+            m_flgFlag = GetFlag(m_mpRebro);
+
+            //Console.WriteLine(m_mpRebro.first + " " + m_mpRebro.second); //UDOLI
+
+            switch (m_flgFlag)
             {
                 case Flags.NEXT:
 
-                    //
                     return Flags.NEXT;
-                    break;
 
                 case Flags.NO_BRIDGE:
-                    DeleteData(pair, flag);
-                    AddNumberNoRebra();
-                    foreach (var obj in m_mpBufferPairs)
-                    {
-                        m_mpGrafPairs.Insert(0, obj);
-                    }
-                    ClearFathers();
-                    m_mpBufferPairs.Clear();
-                    //
+                    DeleteData(m_mpRebro);
+                    IsertStoryDataInGrafRebra();
+
                     return Flags.NO_BRIDGE;
-                    break;
 
                 case Flags.IS_BRIDGE:
-                    DeleteData(pair, flag);
-                    foreach (var obj in m_mpBufferPairs)
-                    {
-                        m_mpGrafPairs.Insert(0, obj);
-                    }
-                    ClearFathers();
-                    m_mpBufferPairs.Clear();
-                    //
-                    return Flags.IS_BRIDGE;
-                    break;
+                    DeleteData(m_mpRebro);
+                    IsertStoryDataInGrafRebra();
 
-                default:
-                    break;
+                    return Flags.IS_BRIDGE;
+
             }
+
             return Flags.END;
 
 
         }
 
-        private Flags GetStatus(MyPair pair)
+        private MyPair FindRebro(int father)
         {
-            int search_number = pair.second;
-            MyPair tmp = FindPair(search_number);
-            if (IsRebroToFork(pair))
+            MyPair result = m_mpGrafRebra.Find(parr => parr.first == father);
+            //Нашёл | не нашёл
+            if (result == null)
+            {
+                result = m_mpGrafRebra.Find(parr => parr.second == father);
+                if (result != null)
+                    ReverseRebro(result);
+            }
+
+            return result;
+
+        }
+
+        private void ReverseRebro(MyPair rebro)
+        {
+            m_mpGrafRebra.Remove(rebro);
+            int frst = 0;
+            frst = rebro.first;
+
+            int scnd = 0;
+            scnd = rebro.second;
+            rebro.second = frst;
+            rebro.first = scnd;
+            m_mpGrafRebra.Add(rebro);
+
+        }
+
+        private Flags GetFlag(MyPair rebro)
+        {
+            int nextFather = m_intStoryOfFathers.Last();
+            MyPair nextRebro = FindRebro(nextFather);
+
+            if (IsNoBridge(rebro))
                 return Flags.NO_BRIDGE;
-            if ((tmp == null) )
+            if (IsBridge(rebro))
                 return Flags.IS_BRIDGE;
-            
+            if (nextRebro != null)
+                return Flags.NEXT;
 
-            return Flags.NEXT;
-        }
-
-        private MyPair FindPair(int number)
-        {
-            MyPair result = m_mpGrafPairs.Find(parr => parr.first == number);
-            if (result != null)
-            {
-                m_RemovePair = result;
-                return result;
-            }
-
-            result = m_mpGrafPairs.Find(parr => parr.second == number);
-            if (result != null)
-            {
-                m_RemovePair = result;
-                MyPair pair = new MyPair();
-                pair.Insert(result.second, result.first); //Переворот пары (тк идеалогия: (родитель, потомок)
-                m_mpGrafPairs.Add(pair);
-                m_mpGrafPairs.Remove(result);
-                result = pair;
-
-                return result;
-            }
-
-            return null;
+            return Flags.END;
 
         }
 
-        private bool IsFork(int number)
+        private bool IsBridge(MyPair rebro)
         {
-            int count = 0; //Колоичество рёбер от этого объекта
-            foreach (var gr in m_mpCopyPairs)
-            {
-                if ((number == gr.first) || (number == gr.second))
-                    count++;
-            }
-            if (count > 1)
+            int nextFather = m_intStoryOfFathers.Last();
+            MyPair nextRebro = FindRebro(nextFather);
+
+            if ((nextRebro == null) && (!HZ(rebro)))
                 return true;
 
             return false;
         }
 
-        private bool IsRebroToFork(MyPair pair)
-        {
-            foreach (var gr in m_NumbersForks)
+        /*
+         * int nextFather = m_intStoryOfFathers.Last();
+            MyPair nextRebro = FindRebro(nextFather);
+
+            int count = 0;
+            foreach (var da in m_intStoryOfFathers)
             {
-                if (pair.second == gr)
-                {
-                    return true;
-                }
-                    
+                if (da == rebro.second)
+                    count++;
             }
+
+            if ((nextRebro == null) && (count < 2) && (!HZ(rebro)))
+                return true;
+
+            return false;
+         */
+
+        private bool HZ(MyPair rebro)
+        {
+            int frst = rebro.first;
+            int scnd = rebro.second;
+            int tmp1 = 0;
+            int tmp2 = 0;
+            tmp1 = m_intStoryOfFathers.Find(fthr => fthr == frst);
+            tmp2 = m_intStoryOfFathers.Find(fthr => fthr == frst);
+            if (tmp1 == frst)
+            {
+                tmp2 = m_intVershinsNoRebra.Find(fthr => fthr == frst);
+
+            }
+            else if (tmp2 == scnd)
+            {
+                tmp1 = m_intVershinsNoRebra.Find(fthr => fthr == frst);
+                if (tmp1 == frst)
+                    return true;
+            }
+
+            return false;
+        } 
+
+        private bool IsNoBridge(MyPair rebro)
+        {
+            int father = rebro.second;
+            int counter = 0;
+
+            foreach(var da in m_intStoryOfFathers)
+            {
+                if(da == father)
+                    counter++; 
+            }    
+
+            if (counter > 1)
+                return true;
+
+            return false;
+
+        }
+
+        /*
+         * int father = rebro.second;
+            int SOVPADENIE = 0;
+            SOVPADENIE = m_intStoryOfFathers.Find(fthr => fthr == father);
+
+            if (SOVPADENIE != 0)
+                return true;
+
+            return false;
+         */
+
+        private void DeleteData(MyPair rebro)
+        {
+            if (m_flgFlag == Flags.IS_BRIDGE)
+            {
+                m_mpStoryOfWay.Remove(rebro);
+
+                //Чистим вершины
+                int last = m_intStoryOfFathers.Last();
+                m_intStoryOfFathers.Reverse();
+                m_intStoryOfFathers.Remove(last); //Просто, чтобы на первом же не остановилось
+                foreach (var da in m_intStoryOfFathers.ToList())
+                {
+                    if (!IsFork(da))
+                        m_intStoryOfFathers.Remove(da);
+
+                    if (da == rebro.second)
+                        break;
+                }
+                m_intStoryOfFathers.Reverse();
+
+                m_mpBridgeRebra.Add(rebro); // ДОБАВЛЕНИЕ В СПИСОК - РЁБРА
+            }
+            else //Для NO_BRIDGE
+            {
+                //Чистим из итсории движения
+                m_mpNoBridgeRebra.Add(m_mpStoryOfWay.Last()); // ДОБАВЛЕНИЕ В СПИСОК - НЕ РЁБРА
+                m_mpStoryOfWay.Remove(m_mpStoryOfWay.Last()); //Просто, чтобы на первом же не остановилось
+                m_mpStoryOfWay.Reverse();
+                foreach (var da in m_mpStoryOfWay.ToList())
+                {
+                    if (da.second == rebro.second)
+                        break;
+                    m_mpStoryOfWay.Remove(da);
+
+                    m_mpNoBridgeRebra.Add(da); // ДОБАВЛЕНИЕ В СПИСОК - НЕ РЁБРА
+                }
+                m_mpStoryOfWay.Reverse();
+
+                //Чистим вершины
+                int last = m_intStoryOfFathers.Last();
+                m_intStoryOfFathers.Reverse();
+                m_intStoryOfFathers.Remove(last); //Просто, чтобы на первом же не остановилось
+                foreach (var da in m_intStoryOfFathers.ToList())
+                {
+                    if (!IsFork(da))
+                        m_intStoryOfFathers.Remove(da);
+                    m_intVershinsNoRebra.Add(da);
+
+                    if (da == rebro.second)
+                        break;
+                }
+                m_intStoryOfFathers.Reverse();
+
+            }
+
+        }
+        private bool IsFork(int number)
+        {
+            int count = 0; //Колоичество рёбер от этого объекта
+            foreach (var gr in m_mpGrafRebra)
+            {
+                if ((number == gr.first) || (number == gr.second))
+                    count++;
+            }
+            if (count > 0)
+                return true;
 
             return false;
         }
 
-        private void DeleteData(MyPair pair, Flags flag)
+        private void IsertStoryDataInGrafRebra()
         {
-            if (flag == Flags.NO_BRIDGE)
+            foreach(var da in m_mpStoryOfWay)
             {
-                int number_fork = pair.second;
-                int da = 0;
-                while (true)
-                {
-                    if ((m_mpBufferPairs.Count() == 0) || (m_mpBufferPairs.Last().second == number_fork))
-                        da++;
-                    if (da > 1)
-                        break;
-                    m_mpNoBridgeRebra.Add(m_mpBufferPairs.Last());
-                    m_mpBufferPairs.Remove(m_mpBufferPairs.Last());
+                int counter = 0;
+                foreach (var net in m_mpGrafRebra.ToList())
+                {                    
+                    if(da == net)
+                        counter++;
 
                 }
-
-                int tmp = m_NumberFathers.Last();
-                m_NumberFathers.Reverse();
-                m_NumberFathers.Remove(tmp);
-                m_NumberFathers.Reverse();
-
-            }
-            else
-            {
-                m_mpBridgeRebra.Add(m_mpBufferPairs.Last());
-                m_mpGrafPairs.Remove(pair);
-                m_mpBufferPairs.Remove(pair);
-                int number_fork = pair.first;
-                m_NumbersForks.Remove(m_NumbersForks.Last());
-                m_NumberFathers.Remove(m_NumberFathers.Last());
-
+                if (counter == 0)
+                    m_mpGrafRebra.Add(da);
             }
         }
 
-        private void ClearFathers()
-        {
-            MyPair tmp = new MyPair();
-            List<MyPair> copy = new List<MyPair>();
-            foreach (var g in m_mpGrafPairs)
-            {
-                copy.Add(g);
-            }
-            foreach (var obj in m_NumberFathers.ToList())
-            {
-                
+        private List<MyPair> m_mpGrafRebra = new List<MyPair>();
 
-                tmp = FindPairSecond(obj, copy);
-                if (tmp != null)
-                    RemovePaireSecond(tmp, copy);
-                
+        //Посредники в работе
+        private Flags m_flgFlag;
 
-                if (tmp == null)
-                    m_NumberFathers.Remove(obj);
-            }
+        private List<MyPair> m_mpStoryOfWay = new List<MyPair>();
+        private List<int> m_intStoryOfFathers = new List<int>();
+        private List<int> m_intVershinsNoRebra = new List<int>();
 
-        }
-
-        private MyPair FindPairSecond(int number, List<MyPair> list)
-        {
-            MyPair result = list.Find(parr => parr.first == number);
-            if (result != null)
-            {
-                return result;
-            }
-
-            result = list.Find(parr => parr.second == number);
-            if (result != null)
-            {
-                MyPair pair = new MyPair();
-                pair.Insert(result.second, result.first); //Переворот пары (тк идеалогия: (родитель, потомок)
-                list.Add(pair);
-                list.Remove(result);
-                result = pair;
-
-                return result;
-            }
-
-            return null;
-
-        }
-
-        private void RemovePair(MyPair pair)
-        {
-            m_mpGrafPairs.Remove(pair);
-            MyPair tmp = new MyPair();
-            tmp.Insert(pair.second, pair.first);
-            m_mpGrafPairs.Remove(tmp);
-        }
-
-        private void RemovePaireSecond(MyPair pair, List<MyPair> list)
-        {
-            list.Remove(pair);
-            MyPair tmp = new MyPair();
-            tmp.Insert(pair.second, pair.first);
-            list.Remove(tmp);
-        }
-
-        public static List<T> removeDuplicates<T>(List<T> list)
-        {
-            return new HashSet<T>(list).ToList();
-        }
-        private void AddNumberNoRebra()
-        {
-            foreach(var obj in m_mpNoBridgeRebra)
-            {
-                m_NumberNoRebra.Add(obj.first);
-                m_NumberNoRebra.Add(obj.second);
-            }
-            m_NumberNoRebra = removeDuplicates(m_NumberNoRebra);
-
-        }
-
+        //Результат
         public List<MyPair> m_mpNoBridgeRebra = new List<MyPair>();
         public List<MyPair> m_mpBridgeRebra = new List<MyPair>();
-        public MyPair m_mpThisRebro = new MyPair();
-
-        private List<MyPair> m_mpGrafPairs = new List<MyPair>();
-        private List<MyPair> m_mpBufferPairs = new List<MyPair>();
-        private MyPair m_RemovePair = new MyPair();
-        private List<MyPair> m_mpCopyPairs = new List<MyPair>();
-
-        private List<int> m_NumbersForks = new List<int>();
-        private List<int> m_NumberFathers = new List<int>();
-        private List<int> m_NumberNoRebra = new List<int>();
+        public MyPair m_mpThisRebro;
 
 
 
