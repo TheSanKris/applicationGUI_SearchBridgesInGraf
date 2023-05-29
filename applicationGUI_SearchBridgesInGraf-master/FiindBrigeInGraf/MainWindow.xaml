@@ -1,0 +1,97 @@
+﻿<Window x:Class="FiindBrigeInGraf.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FiindBrigeInGraf"
+        mc:Ignorable="d"
+        Title="MainWindow" MinWidth="800" MinHeight="600" MaxHeight="600" MaxWidth="800">
+    
+    <Grid x:Name="grid">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="350"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="150"/>
+            </Grid.RowDefinitions>
+            <ScrollViewer Margin="10" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" >
+                <Canvas x:Name="canvas" Grid.Row="0" Background="Bisque" MouseLeftButtonDown="canvas_MouseLeftButtonDown"/>
+            </ScrollViewer>
+
+            
+            <TextBlock x:Name="info" Grid.Row="1" Background="#FFCBE6FD" Margin="10" Style="{StaticResource TextBlocksStyle}"/>
+        </Grid>
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0" Orientation="Vertical">
+                    <TextBlock Text="Ручная установка" Style="{StaticResource TextBlocksStyle}" HorizontalAlignment="Center" Margin="0 20 0 0"/>
+                    <StackPanel Orientation="Horizontal">
+                        <Button x:Name="obj" Click="obj_Click" Style="{StaticResource ButtonsStyle}">
+                            <Ellipse Height="35" Width="35" StrokeThickness="3" Stroke="Black"/>
+                        </Button>
+                        <Button x:Name="reb" Click="reb_Click" Style="{StaticResource ButtonsStyle}" >
+                            <Line X1="0" X2="30" Y1="0" Y2="30" StrokeThickness="3" Stroke="Black"/>
+                        </Button>
+                        
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Button x:Name="Clear" Content="C" FontSize="32" FontWeight="Bold" Style="{StaticResource ButtonsStyle}" Click="Clear_Click"/>
+                    </StackPanel>
+                    
+                </StackPanel>
+
+                <StackPanel Grid.Column="1" Orientation="Vertical">
+                    <TextBlock Text="Автоматическая установка" Style="{StaticResource TextBlocksStyle}" HorizontalAlignment="Center" Margin="0 20 0 0" />
+                    <StackPanel Orientation="Horizontal" Margin="0 20 0 0">
+                        <TextBox x:Name="chetchik" Text="0" Width="50" Height="50" VerticalAlignment="Bottom" FontSize="24" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"  Keyboard.KeyUp="chetchik_KeyUp"/>
+                        <StackPanel Orientation="Vertical" VerticalAlignment="Bottom">
+                            <Button x:Name="incr" Width="25" Height="25" Content="▲" Click="incr_Click"/>
+                            <Button x:Name="decr" Width="25" Height="25" Content="▼" Click="decr_Click"/>
+                        </StackPanel>
+                        <TextBlock Text="Количество вершин" Style="{StaticResource TextBlocksStyle}" Margin="10 0 0 0" TextWrapping="Wrap" Width="80" VerticalAlignment="Center"/>
+                    </StackPanel>
+                    <Button x:Name="buttonRandomCreate" Width="100" Height="30" Margin="0 20 0 0" Content="Создать" Click="buttonRandomCreate_Click" HorizontalAlignment="Left"
+                            />
+                </StackPanel>
+
+            </Grid>
+
+            <StackPanel Grid.Row="1" Orientation="Vertical">
+                <TextBlock Text="Авто-ход" Style="{StaticResource TextBlocksStyle}" HorizontalAlignment="Center"/>
+                <StackPanel Orientation="Horizontal" Margin="0 20 0 0" >
+                    <TextBox x:Name="chetchikA" Text="0" Width="200" Height="50" VerticalAlignment="Bottom" FontSize="24" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"  Keyboard.KeyUp="chetchikA_KeyUp" Margin="30 0 0 0"/>
+                    <StackPanel Orientation="Vertical" VerticalAlignment="Bottom">
+                        <Button x:Name="incrA" Width="25" Height="25" Content="▲" Click="incrA_Click"/>
+                        <Button x:Name="decrA" Width="25" Height="25" Content="▼" Click="decrA_Click"/>
+                    </StackPanel>
+                    <TextBlock Style="{StaticResource TextBlocksStyle}" Margin="10 0 0 0" TextWrapping="Wrap" Width="80" VerticalAlignment="Center"><Run Language="ru-ru" Text="Задержка"/></TextBlock>
+                </StackPanel>
+                <Button x:Name="buttonA" Width="260" Height="30" Margin="0 20 0 0" Content="Старт" HorizontalAlignment="Center" Click="buttonA_Click"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Vertical" Grid.Row="2">
+                <TextBlock Text="Шаг за шагом" Style="{StaticResource TextBlocksStyle}" HorizontalAlignment="Center"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Button x:Name="BackStep" Content="&lt;-" FontSize="32" FontWeight="Bold" Style="{StaticResource ButtonsStyle}" Click="BackStep_Click" Margin="0 20 0 0"/>
+                    <Button x:Name="NextStep" Content="->" FontSize="32" FontWeight="Bold" Style="{StaticResource ButtonsStyle}" Click="NextStep_Click"/>
+                </StackPanel>
+            </StackPanel>
+
+
+        </Grid>
+    </Grid>
+
+</Window>

@@ -25,6 +25,7 @@ namespace FiindBrigeInGraf
     /// 
     public enum Flags
     {
+        START,
         NEXT,
         NO_BRIDGE,
         IS_BRIDGE,
@@ -47,22 +48,22 @@ namespace FiindBrigeInGraf
 
         Graf graf = new Graf();
         int da = 0;
-
         Flags flag;
 
         ClassButtonCreate buttonCreate = new ClassButtonCreate();
         ClassLineCreate lineCreate = new ClassLineCreate();
 
-        // просто создай кнопку для пошагового поиска и другую для автоматического
+        int h = 0;
+        List<List<DataOfLine>> history = new List<List<DataOfLine>>();
+        
+
+
 
         public MainWindow()
         {
             InitializeComponent();
 
         }
-
-
-
         void CreateRButtonOnCanvas()
         {
             Button rButton = new Button
@@ -210,7 +211,15 @@ namespace FiindBrigeInGraf
             a = 0;
             b = 0;
             rebroPairs.Clear();
+            NextStep.IsEnabled = true;
             double[] coordsLine = new double[4];
+
+            Graf graf = new Graf();
+            Flags flag;
+
+            int h = 0;
+            history.Clear();
+            BackStep.IsEnabled = false;
         }
 
 
@@ -282,7 +291,10 @@ namespace FiindBrigeInGraf
                             line.Stroke = new SolidColorBrush(System.Windows.Media.Color.FromArgb(100, 128, 128, 128));
                             break;
                         }
+
+
                     }
+
                     break;
                 case Flags.NO_BRIDGE:
                     foreach (MyPair myPair1 in graf.m_mpNoBridgeRebra)
@@ -323,12 +335,22 @@ namespace FiindBrigeInGraf
                 case Flags.IS_BRIDGE:
                     foreach (Line line in canvas.Children.OfType<Line>().ToList())
                     {
-                        if (line.DataContext == myPair)
+                        MyPair da = line.DataContext as MyPair;
+                        if ((myPair.first == da.first) && (myPair.second == da.second))
                         {
                             line.Stroke = new SolidColorBrush(System.Windows.Media.Color.FromArgb(200, 255, 0, 0));
                             break;
                         }
+                        MyPair tmp = new MyPair();
+                        tmp.Insert(myPair.second, myPair.first);
+                        if ((myPair.second == da.first) && (myPair.first == da.second))
+                        {
+                            line.Stroke = new SolidColorBrush(System.Windows.Media.Color.FromArgb(200, 255, 0, 0));
+                            break;
+                        }
+
                     }
+
                     break;
                 case Flags.END:
                     NextStep.IsEnabled = false;
@@ -338,40 +360,124 @@ namespace FiindBrigeInGraf
 
         private void BackStep_Click(object sender, RoutedEventArgs e)
         {
-
+            
+            h--;
+            int i =0;
+            if (h >= 0)
+            {
+                List<DataOfLine> listLineH = history[h];
+                foreach (Line line in canvas.Children.OfType<Line>().ToList())
+                {
+                    if (line.DataContext is MyPair == listLineH[i].dataContext is MyPair)
+                    {
+                        line.Stroke = listLineH[i].color;
+                    }
+                    i++;
+                }
+            }
+           
         }
         private void NextStep_Click(object sender, RoutedEventArgs e)
-        {
-            GrafProhd();
+        {   
+            if (flag != Flags.END)
+            {
+                flag = GrafProhd();
+            }
+            else
+            {
+                BackStep.IsEnabled = true;
+                int i = 0;
+                h++;
+                if (h <=history.Count())
+                {
+                    List<DataOfLine> listLineH = history[h];
+                    foreach (Line line in canvas.Children.OfType<Line>().ToList())
+                    {
+                        if (line.DataContext is MyPair == listLineH[i].dataContext is MyPair)
+                        {
+                            line.Stroke = listLineH[i].color;
+                        }
+                        i++;
+                    }
+                }
+            }
+            
         }
 
         public Flags GrafProhd()
         {
+            List<DataOfLine> rebroHistory = new List<DataOfLine>();
+            
             if (da == 0)
                 graf.Init(rebroPairs);
+
+            foreach (Line line in canvas.Children.OfType<Line>().ToList())
+            {
+                DataOfLine dataOfLine = new DataOfLine();
+                dataOfLine.CreateData(line.DataContext as MyPair, line.Stroke);
+                rebroHistory.Add(dataOfLine);
+            }
+            history.Add(rebroHistory);
+            h = history.Count();
+
             da++;
             Flags flag = graf.NextStep();
             ChangeColor(flag, canvas);
+            info.Text = flag.ToString();
+
             return flag;
+
         }
+
+
 
         private void buttonA_Click(object sender, RoutedEventArgs e)
         {
-
-            int x = Convert.ToInt32(chetchik.Text.ToString());
+            dada();
+        }
+        private async void dada()
+        {
+            flag = Flags.START;
+            int x = Convert.ToInt32(chetchikA.Text.ToString());
+            obj.IsEnabled = false;
+            reb.IsEnabled = false;
+            Clear.IsEnabled = false;
+            chetchik.IsEnabled = false;
+            incr.IsEnabled = false;
+            decr.IsEnabled = false;
+            buttonRandomCreate.IsEnabled = false;
+            chetchikA.IsEnabled = false;
+            incrA.IsEnabled = false;
+            decrA.IsEnabled = false;
+            buttonA.IsEnabled = false;
+            BackStep.IsEnabled = false;
+            NextStep.IsEnabled = false;
             while (flag != Flags.END)
             {
+                await Task.Delay(x);
                 flag = GrafProhd();
-                Thread.Sleep(x);
+
+                
             }
-           
+            obj.IsEnabled = true;
+            reb.IsEnabled = true;
+            Clear.IsEnabled = true;
+            chetchik.IsEnabled = true;
+            incr.IsEnabled = true;
+            decr.IsEnabled = true;
+            buttonRandomCreate.IsEnabled = true;
+            chetchikA.IsEnabled = true;
+            incrA.IsEnabled = true;
+            decrA.IsEnabled = true;
+            buttonA.IsEnabled = true;
+            BackStep.IsEnabled = true;
 
         }
 
         private void incrA_Click(object sender, RoutedEventArgs e)
         {
-            int x = Convert.ToInt32(chetchik.Text.ToString());
-            if (x < 50000)
+            int x = Convert.ToInt32(chetchikA.Text.ToString());
+            if (x < 10000)
             {
                 x += 100;
             }
@@ -381,7 +487,7 @@ namespace FiindBrigeInGraf
 
         private void decrA_Click(object sender, RoutedEventArgs e)
         {
-            int x = Convert.ToInt32(chetchik.Text.ToString());
+            int x = Convert.ToInt32(chetchikA.Text.ToString());
             if (x > 0)
             {
                 x -= 100;
@@ -419,11 +525,9 @@ namespace FiindBrigeInGraf
     }
 }
 
-/* 
- * Создвать линии за кнопкой
- * 
- * Сделать кнопки для шагов алгоритма и для автоматического прохода
- * Сделать функции для изменения цвета ребра и вершины относительно флага
- * Механизм для шага назад
- * Сдлеть так, чтобы все вершины были соединены ребрами
- * */
+/* * * * * * * * * * * * * * * * *
+ * Создвать линии за кнопкой     *
+ *                               *
+ * Механизм для шага назад       *
+ *                               *
+ * * * * * * * * * * * * * * * * */

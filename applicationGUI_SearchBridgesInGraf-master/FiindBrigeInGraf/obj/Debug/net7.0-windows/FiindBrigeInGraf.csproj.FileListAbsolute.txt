@@ -1,0 +1,88 @@
+C:\Users\Админ\Documents\КОД КОД КОД\C#\FiindBrigeInGraf\FiindBrigeInGraf\bin\Debug\net7.0-windows\FiindBrigeInGraf.exe
+C:\Users\Админ\Documents\КОД КОД КОД\C#\FiindBrigeInGraf\FiindBrigeInGraf\bin\Debug\net7.0-windows\FiindBrigeInGraf.deps.json
+C:\Users\Админ\Documents\КОД КОД КОД\C#\FiindBrigeInGraf\FiindBrigeInGraf\bin\Debug\net7.0-windows\FiindBrigeInGraf.runtimeconfig.json
+C:\Users\Админ\Documents\КОД КОД КОД\C#\FiindBrigeInGraf\FiindBrigeInGraf\bin\Debug\net7.0-windows\FiindBrigeInGraf.dll
+C:\Users\Админ\Documents\КОД КОД КОД\C#\FiindBrigeInGraf\FiindBrigeInGraf\bin\Debug\net7.0-windows\FiindBrigeInGraf.pdb
+C:\Users\Админ\Documents\КОД КОД КОД\C#\FiindBrigeInGraf\FiindBrigeInGraf\obj\Debug\net7.0-windows\FiindBrigeInGraf.csproj.AssemblyReference.cache
+C:\Users\Админ\Documents\КОД КОД КОД\C#\FiindBrigeInGraf\FiindBrigeInGraf\obj\Debug\net7.0-windows\MainWindow.g.cs
+C:\Users\Админ\Documents\КОД КОД КОД\C#\FiindBrigeInGraf\FiindBrigeInGraf\obj\Debug\net7.0-windows\App.g.cs
+C:\Users\Админ\Documents\КОД КОД КОД\C#\FiindBrigeInGraf\FiindBrigeInGraf\obj\Debug\net7.0-windows\FiindBrigeInGraf_MarkupCompile.cache
+C:\Users\Админ\Documents\КОД КОД КОД\C#\FiindBrigeInGraf\FiindBrigeInGraf\obj\Debug\net7.0-windows\FiindBrigeInGraf_MarkupCompile.lref
+C:\Users\Админ\Documents\КОД КОД КОД\C#\FiindBrigeInGraf\FiindBrigeInGraf\obj\Debug\net7.0-windows\MainWindow.baml
+C:\Users\Админ\Documents\КОД КОД КОД\C#\FiindBrigeInGraf\FiindBrigeInGraf\obj\Debug\net7.0-windows\FiindBrigeInGraf.g.resources
+C:\Users\Админ\Documents\КОД КОД КОД\C#\FiindBrigeInGraf\FiindBrigeInGraf\obj\Debug\net7.0-windows\FiindBrigeInGraf.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Админ\Documents\КОД КОД КОД\C#\FiindBrigeInGraf\FiindBrigeInGraf\obj\Debug\net7.0-windows\FiindBrigeInGraf.AssemblyInfoInputs.cache
+C:\Users\Админ\Documents\КОД КОД КОД\C#\FiindBrigeInGraf\FiindBrigeInGraf\obj\Debug\net7.0-windows\FiindBrigeInGraf.AssemblyInfo.cs
+C:\Users\Админ\Documents\КОД КОД КОД\C#\FiindBrigeInGraf\FiindBrigeInGraf\obj\Debug\net7.0-windows\FiindBrigeInGraf.csproj.CoreCompileInputs.cache
+C:\Users\Админ\Documents\КОД КОД КОД\C#\FiindBrigeInGraf\FiindBrigeInGraf\obj\Debug\net7.0-windows\FiindBrigeInGraf.dll
+C:\Users\Админ\Documents\КОД КОД КОД\C#\FiindBrigeInGraf\FiindBrigeInGraf\obj\Debug\net7.0-windows\refint\FiindBrigeInGraf.dll
+C:\Users\Админ\Documents\КОД КОД КОД\C#\FiindBrigeInGraf\FiindBrigeInGraf\obj\Debug\net7.0-windows\FiindBrigeInGraf.pdb
+C:\Users\Админ\Documents\КОД КОД КОД\C#\FiindBrigeInGraf\FiindBrigeInGraf\obj\Debug\net7.0-windows\FiindBrigeInGraf.genruntimeconfig.cache
+C:\Users\Админ\Documents\КОД КОД КОД\C#\FiindBrigeInGraf\FiindBrigeInGraf\obj\Debug\net7.0-windows\ref\FiindBrigeInGraf.dll
+C:\Users\Админ\Documents\КОД КОД КОД\C#\FiindBrigeInGraf\FiindBrigeInGraf\obj\Debug\net7.0-windows\App.baml
+C:\Progects\C#\FiindBrigeInGraf\FiindBrigeInGraf\bin\Debug\net7.0-windows\FiindBrigeInGraf.exe
+C:\Progects\C#\FiindBrigeInGraf\FiindBrigeInGraf\bin\Debug\net7.0-windows\FiindBrigeInGraf.deps.json
+C:\Progects\C#\FiindBrigeInGraf\FiindBrigeInGraf\bin\Debug\net7.0-windows\FiindBrigeInGraf.runtimeconfig.json
+C:\Progects\C#\FiindBrigeInGraf\FiindBrigeInGraf\bin\Debug\net7.0-windows\FiindBrigeInGraf.dll
+C:\Progects\C#\FiindBrigeInGraf\FiindBrigeInGraf\bin\Debug\net7.0-windows\FiindBrigeInGraf.pdb
+C:\Progects\C#\FiindBrigeInGraf\FiindBrigeInGraf\obj\Debug\net7.0-windows\FiindBrigeInGraf.csproj.AssemblyReference.cache
+C:\Progects\C#\FiindBrigeInGraf\FiindBrigeInGraf\obj\Debug\net7.0-windows\MainWindow.g.cs
+C:\Progects\C#\FiindBrigeInGraf\FiindBrigeInGraf\obj\Debug\net7.0-windows\App.g.cs
+C:\Progects\C#\FiindBrigeInGraf\FiindBrigeInGraf\obj\Debug\net7.0-windows\FiindBrigeInGraf_MarkupCompile.cache
+C:\Progects\C#\FiindBrigeInGraf\FiindBrigeInGraf\obj\Debug\net7.0-windows\FiindBrigeInGraf_MarkupCompile.lref
+C:\Progects\C#\FiindBrigeInGraf\FiindBrigeInGraf\obj\Debug\net7.0-windows\App.baml
+C:\Progects\C#\FiindBrigeInGraf\FiindBrigeInGraf\obj\Debug\net7.0-windows\MainWindow.baml
+C:\Progects\C#\FiindBrigeInGraf\FiindBrigeInGraf\obj\Debug\net7.0-windows\FiindBrigeInGraf.g.resources
+C:\Progects\C#\FiindBrigeInGraf\FiindBrigeInGraf\obj\Debug\net7.0-windows\FiindBrigeInGraf.GeneratedMSBuildEditorConfig.editorconfig
+C:\Progects\C#\FiindBrigeInGraf\FiindBrigeInGraf\obj\Debug\net7.0-windows\FiindBrigeInGraf.AssemblyInfoInputs.cache
+C:\Progects\C#\FiindBrigeInGraf\FiindBrigeInGraf\obj\Debug\net7.0-windows\FiindBrigeInGraf.AssemblyInfo.cs
+C:\Progects\C#\FiindBrigeInGraf\FiindBrigeInGraf\obj\Debug\net7.0-windows\FiindBrigeInGraf.csproj.CoreCompileInputs.cache
+C:\Progects\C#\FiindBrigeInGraf\FiindBrigeInGraf\obj\Debug\net7.0-windows\FiindBrigeInGraf.dll
+C:\Progects\C#\FiindBrigeInGraf\FiindBrigeInGraf\obj\Debug\net7.0-windows\refint\FiindBrigeInGraf.dll
+C:\Progects\C#\FiindBrigeInGraf\FiindBrigeInGraf\obj\Debug\net7.0-windows\FiindBrigeInGraf.pdb
+C:\Progects\C#\FiindBrigeInGraf\FiindBrigeInGraf\obj\Debug\net7.0-windows\FiindBrigeInGraf.genruntimeconfig.cache
+C:\Progects\C#\FiindBrigeInGraf\FiindBrigeInGraf\obj\Debug\net7.0-windows\ref\FiindBrigeInGraf.dll
+C:\Users\Админ\Desktop\applicationGUI_SearchBridgesInGraf-master\FiindBrigeInGraf\bin\Debug\net7.0-windows\FiindBrigeInGraf.exe
+C:\Users\Админ\Desktop\applicationGUI_SearchBridgesInGraf-master\FiindBrigeInGraf\bin\Debug\net7.0-windows\FiindBrigeInGraf.deps.json
+C:\Users\Админ\Desktop\applicationGUI_SearchBridgesInGraf-master\FiindBrigeInGraf\bin\Debug\net7.0-windows\FiindBrigeInGraf.runtimeconfig.json
+C:\Users\Админ\Desktop\applicationGUI_SearchBridgesInGraf-master\FiindBrigeInGraf\bin\Debug\net7.0-windows\FiindBrigeInGraf.dll
+C:\Users\Админ\Desktop\applicationGUI_SearchBridgesInGraf-master\FiindBrigeInGraf\bin\Debug\net7.0-windows\FiindBrigeInGraf.pdb
+C:\Users\Админ\Desktop\applicationGUI_SearchBridgesInGraf-master\FiindBrigeInGraf\obj\Debug\net7.0-windows\FiindBrigeInGraf.csproj.AssemblyReference.cache
+C:\Users\Админ\Desktop\applicationGUI_SearchBridgesInGraf-master\FiindBrigeInGraf\obj\Debug\net7.0-windows\MainWindow.g.cs
+C:\Users\Админ\Desktop\applicationGUI_SearchBridgesInGraf-master\FiindBrigeInGraf\obj\Debug\net7.0-windows\App.g.cs
+C:\Users\Админ\Desktop\applicationGUI_SearchBridgesInGraf-master\FiindBrigeInGraf\obj\Debug\net7.0-windows\FiindBrigeInGraf_MarkupCompile.cache
+C:\Users\Админ\Desktop\applicationGUI_SearchBridgesInGraf-master\FiindBrigeInGraf\obj\Debug\net7.0-windows\FiindBrigeInGraf_MarkupCompile.lref
+C:\Users\Админ\Desktop\applicationGUI_SearchBridgesInGraf-master\FiindBrigeInGraf\obj\Debug\net7.0-windows\App.baml
+C:\Users\Админ\Desktop\applicationGUI_SearchBridgesInGraf-master\FiindBrigeInGraf\obj\Debug\net7.0-windows\MainWindow.baml
+C:\Users\Админ\Desktop\applicationGUI_SearchBridgesInGraf-master\FiindBrigeInGraf\obj\Debug\net7.0-windows\FiindBrigeInGraf.g.resources
+C:\Users\Админ\Desktop\applicationGUI_SearchBridgesInGraf-master\FiindBrigeInGraf\obj\Debug\net7.0-windows\FiindBrigeInGraf.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Админ\Desktop\applicationGUI_SearchBridgesInGraf-master\FiindBrigeInGraf\obj\Debug\net7.0-windows\FiindBrigeInGraf.AssemblyInfoInputs.cache
+C:\Users\Админ\Desktop\applicationGUI_SearchBridgesInGraf-master\FiindBrigeInGraf\obj\Debug\net7.0-windows\FiindBrigeInGraf.AssemblyInfo.cs
+C:\Users\Админ\Desktop\applicationGUI_SearchBridgesInGraf-master\FiindBrigeInGraf\obj\Debug\net7.0-windows\FiindBrigeInGraf.csproj.CoreCompileInputs.cache
+C:\Users\Админ\Desktop\applicationGUI_SearchBridgesInGraf-master\FiindBrigeInGraf\obj\Debug\net7.0-windows\FiindBrigeInGraf.dll
+C:\Users\Админ\Desktop\applicationGUI_SearchBridgesInGraf-master\FiindBrigeInGraf\obj\Debug\net7.0-windows\refint\FiindBrigeInGraf.dll
+C:\Users\Админ\Desktop\applicationGUI_SearchBridgesInGraf-master\FiindBrigeInGraf\obj\Debug\net7.0-windows\FiindBrigeInGraf.pdb
+C:\Users\Админ\Desktop\applicationGUI_SearchBridgesInGraf-master\FiindBrigeInGraf\obj\Debug\net7.0-windows\FiindBrigeInGraf.genruntimeconfig.cache
+C:\Users\Админ\Desktop\applicationGUI_SearchBridgesInGraf-master\FiindBrigeInGraf\obj\Debug\net7.0-windows\ref\FiindBrigeInGraf.dll
+C:\Progects\C#\applicationGUI_SearchBridgesInGraf-master\applicationGUI_SearchBridgesInGraf-master\FiindBrigeInGraf\bin\Debug\net7.0-windows\FiindBrigeInGraf.exe
+C:\Progects\C#\applicationGUI_SearchBridgesInGraf-master\applicationGUI_SearchBridgesInGraf-master\FiindBrigeInGraf\bin\Debug\net7.0-windows\FiindBrigeInGraf.deps.json
+C:\Progects\C#\applicationGUI_SearchBridgesInGraf-master\applicationGUI_SearchBridgesInGraf-master\FiindBrigeInGraf\bin\Debug\net7.0-windows\FiindBrigeInGraf.runtimeconfig.json
+C:\Progects\C#\applicationGUI_SearchBridgesInGraf-master\applicationGUI_SearchBridgesInGraf-master\FiindBrigeInGraf\bin\Debug\net7.0-windows\FiindBrigeInGraf.dll
+C:\Progects\C#\applicationGUI_SearchBridgesInGraf-master\applicationGUI_SearchBridgesInGraf-master\FiindBrigeInGraf\bin\Debug\net7.0-windows\FiindBrigeInGraf.pdb
+C:\Progects\C#\applicationGUI_SearchBridgesInGraf-master\applicationGUI_SearchBridgesInGraf-master\FiindBrigeInGraf\obj\Debug\net7.0-windows\FiindBrigeInGraf.csproj.AssemblyReference.cache
+C:\Progects\C#\applicationGUI_SearchBridgesInGraf-master\applicationGUI_SearchBridgesInGraf-master\FiindBrigeInGraf\obj\Debug\net7.0-windows\MainWindow.g.cs
+C:\Progects\C#\applicationGUI_SearchBridgesInGraf-master\applicationGUI_SearchBridgesInGraf-master\FiindBrigeInGraf\obj\Debug\net7.0-windows\App.g.cs
+C:\Progects\C#\applicationGUI_SearchBridgesInGraf-master\applicationGUI_SearchBridgesInGraf-master\FiindBrigeInGraf\obj\Debug\net7.0-windows\FiindBrigeInGraf_MarkupCompile.cache
+C:\Progects\C#\applicationGUI_SearchBridgesInGraf-master\applicationGUI_SearchBridgesInGraf-master\FiindBrigeInGraf\obj\Debug\net7.0-windows\FiindBrigeInGraf_MarkupCompile.lref
+C:\Progects\C#\applicationGUI_SearchBridgesInGraf-master\applicationGUI_SearchBridgesInGraf-master\FiindBrigeInGraf\obj\Debug\net7.0-windows\App.baml
+C:\Progects\C#\applicationGUI_SearchBridgesInGraf-master\applicationGUI_SearchBridgesInGraf-master\FiindBrigeInGraf\obj\Debug\net7.0-windows\MainWindow.baml
+C:\Progects\C#\applicationGUI_SearchBridgesInGraf-master\applicationGUI_SearchBridgesInGraf-master\FiindBrigeInGraf\obj\Debug\net7.0-windows\FiindBrigeInGraf.g.resources
+C:\Progects\C#\applicationGUI_SearchBridgesInGraf-master\applicationGUI_SearchBridgesInGraf-master\FiindBrigeInGraf\obj\Debug\net7.0-windows\FiindBrigeInGraf.GeneratedMSBuildEditorConfig.editorconfig
+C:\Progects\C#\applicationGUI_SearchBridgesInGraf-master\applicationGUI_SearchBridgesInGraf-master\FiindBrigeInGraf\obj\Debug\net7.0-windows\FiindBrigeInGraf.AssemblyInfoInputs.cache
+C:\Progects\C#\applicationGUI_SearchBridgesInGraf-master\applicationGUI_SearchBridgesInGraf-master\FiindBrigeInGraf\obj\Debug\net7.0-windows\FiindBrigeInGraf.AssemblyInfo.cs
+C:\Progects\C#\applicationGUI_SearchBridgesInGraf-master\applicationGUI_SearchBridgesInGraf-master\FiindBrigeInGraf\obj\Debug\net7.0-windows\FiindBrigeInGraf.csproj.CoreCompileInputs.cache
+C:\Progects\C#\applicationGUI_SearchBridgesInGraf-master\applicationGUI_SearchBridgesInGraf-master\FiindBrigeInGraf\obj\Debug\net7.0-windows\FiindBrigeInGraf.dll
+C:\Progects\C#\applicationGUI_SearchBridgesInGraf-master\applicationGUI_SearchBridgesInGraf-master\FiindBrigeInGraf\obj\Debug\net7.0-windows\refint\FiindBrigeInGraf.dll
+C:\Progects\C#\applicationGUI_SearchBridgesInGraf-master\applicationGUI_SearchBridgesInGraf-master\FiindBrigeInGraf\obj\Debug\net7.0-windows\FiindBrigeInGraf.pdb
+C:\Progects\C#\applicationGUI_SearchBridgesInGraf-master\applicationGUI_SearchBridgesInGraf-master\FiindBrigeInGraf\obj\Debug\net7.0-windows\FiindBrigeInGraf.genruntimeconfig.cache
+C:\Progects\C#\applicationGUI_SearchBridgesInGraf-master\applicationGUI_SearchBridgesInGraf-master\FiindBrigeInGraf\obj\Debug\net7.0-windows\ref\FiindBrigeInGraf.dll

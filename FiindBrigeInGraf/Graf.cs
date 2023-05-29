@@ -53,15 +53,14 @@ namespace FiindBrigeInGraf
 
                 case Flags.NO_BRIDGE:
                     DeleteData(m_mpRebro);
-                    IsertStoryDataInGrafRebra();
 
                     return Flags.NO_BRIDGE;
 
                 case Flags.IS_BRIDGE:
                     DeleteData(m_mpRebro);
-                    IsertStoryDataInGrafRebra();
 
                     return Flags.IS_BRIDGE;
+
 
             }
 
@@ -263,23 +262,7 @@ namespace FiindBrigeInGraf
                 return true;
 
             return false;
-        }
-
-        private void IsertStoryDataInGrafRebra()
-        {
-            foreach(var da in m_mpStoryOfWay)
-            {
-                int counter = 0;
-                foreach (var net in m_mpGrafRebra.ToList())
-                {                    
-                    if(da == net)
-                        counter++;
-
-                }
-                if (counter == 0)
-                    m_mpGrafRebra.Add(da);
-            }
-        }
+        }   
 
         private List<MyPair> m_mpGrafRebra = new List<MyPair>();
 

@@ -85,7 +85,7 @@
             <StackPanel Orientation="Vertical" Grid.Row="2">
                 <TextBlock Text="Шаг за шагом" Style="{StaticResource TextBlocksStyle}" HorizontalAlignment="Center"/>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                    <Button x:Name="BackStep" Content="&lt;-" FontSize="32" FontWeight="Bold" Style="{StaticResource ButtonsStyle}" Click="BackStep_Click" Margin="0 20 0 0"/>
+                    <Button x:Name="BackStep" Content="&lt;-" IsEnabled="True" FontSize="32" FontWeight="Bold" Style="{StaticResource ButtonsStyle}" Click="BackStep_Click" Margin="0 20 0 0"/>
                     <Button x:Name="NextStep" Content="->" FontSize="32" FontWeight="Bold" Style="{StaticResource ButtonsStyle}" Click="NextStep_Click"/>
                 </StackPanel>
             </StackPanel>
