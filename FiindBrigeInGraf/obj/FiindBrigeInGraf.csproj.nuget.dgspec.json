@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Progects\\C#\\applicationGUI_SearchBridgesInGraf-master\\FiindBrigeInGraf\\FiindBrigeInGraf.csproj": {}
+    "C:\\Progects\\C#\\FiindBrigeInGraf\\FiindBrigeInGraf\\FiindBrigeInGraf.csproj": {}
   },
   "projects": {
-    "C:\\Progects\\C#\\applicationGUI_SearchBridgesInGraf-master\\FiindBrigeInGraf\\FiindBrigeInGraf.csproj": {
+    "C:\\Progects\\C#\\FiindBrigeInGraf\\FiindBrigeInGraf\\FiindBrigeInGraf.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Progects\\C#\\applicationGUI_SearchBridgesInGraf-master\\FiindBrigeInGraf\\FiindBrigeInGraf.csproj",
+        "projectUniqueName": "C:\\Progects\\C#\\FiindBrigeInGraf\\FiindBrigeInGraf\\FiindBrigeInGraf.csproj",
         "projectName": "FiindBrigeInGraf",
-        "projectPath": "C:\\Progects\\C#\\applicationGUI_SearchBridgesInGraf-master\\FiindBrigeInGraf\\FiindBrigeInGraf.csproj",
+        "projectPath": "C:\\Progects\\C#\\FiindBrigeInGraf\\FiindBrigeInGraf\\FiindBrigeInGraf.csproj",
         "packagesPath": "C:\\Users\\Miron\\.nuget\\packages\\",
-        "outputPath": "C:\\Progects\\C#\\applicationGUI_SearchBridgesInGraf-master\\FiindBrigeInGraf\\obj\\",
+        "outputPath": "C:\\Progects\\C#\\FiindBrigeInGraf\\FiindBrigeInGraf\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Miron\\AppData\\Roaming\\NuGet\\NuGet.Config"

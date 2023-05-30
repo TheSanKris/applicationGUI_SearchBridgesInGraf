@@ -55,6 +55,7 @@ namespace FiindBrigeInGraf
 
         int h = 0;
         List<List<DataOfLine>> history = new List<List<DataOfLine>>();
+        List<string> textHistroy = new List<string>();
         
 
 
@@ -215,10 +216,11 @@ namespace FiindBrigeInGraf
             double[] coordsLine = new double[4];
 
             Graf graf = new Graf();
-            Flags flag;
+            Flags flag = Flags.START;
 
             int h = 0;
             history.Clear();
+            textHistroy.Clear();
             BackStep.IsEnabled = false;
         }
 
@@ -257,31 +259,20 @@ namespace FiindBrigeInGraf
         public void ChangeColor(Flags flag, Canvas canvas)
         {
             MyPair myPair = graf.m_mpThisRebro;
-/*            int a = myPair.first;
-            int b = myPair.second;*/
 
             switch (flag)
             {
                 case Flags.NEXT:
 
-                   /* foreach (Button button in canvas.Children.OfType<Button>().ToList())
-                    {
-                        if (Convert.ToInt32(button.Content) == a)
-                        {
-                            button.Background = new SolidColorBrush(System.Windows.Media.Color.FromArgb(100, 128, 128, 128));
-                        }
-                        else if (Convert.ToInt32(button.Content) == b)
-                        {
-                            button.Background = new SolidColorBrush(System.Windows.Media.Color.FromArgb(100, 128, 128, 128));
-
-                        }
-                    }*/
                     foreach (Line line in canvas.Children.OfType<Line>().ToList())
                     {
                         MyPair da = line.DataContext as MyPair;
                         if (da == myPair)
                         {
                             line.Stroke = new SolidColorBrush(System.Windows.Media.Color.FromArgb(100, 128, 128, 128));
+                            info.Text = "";
+                            info.Text = $"У вершины {myPair.second} есть продолжение, поэтому ИДЁМ ДАЛЬШЕ.";
+                            textHistroy.Add($"У вершины {myPair.second} есть продолжение, поэтому ИДЁМ ДАЛЬШЕ.");
                             break;
                         }
                         MyPair tmp = new MyPair();
@@ -289,8 +280,12 @@ namespace FiindBrigeInGraf
                         if((tmp.first == da.first) && (tmp.second == da.second))
                         {
                             line.Stroke = new SolidColorBrush(System.Windows.Media.Color.FromArgb(100, 128, 128, 128));
+                            info.Text = "";
+                            info.Text = $"У вершины {tmp.second} есть продолжение, поэтому ИДЁМ ДАЛЬШЕ.";
+                            textHistroy.Add($"У вершины {tmp.second} есть продолжение, поэтому ИДЁМ ДАЛЬШЕ.");
                             break;
                         }
+
 
 
                     }
@@ -299,25 +294,20 @@ namespace FiindBrigeInGraf
                 case Flags.NO_BRIDGE:
                     foreach (MyPair myPair1 in graf.m_mpNoBridgeRebra)
                     {
-                        /*foreach (Button button in canvas.Children.OfType<Button>().ToList())
+                        string NoBridgeRebraText = "";
+                        for (int i = 0; i < graf.m_mpNoBridgeRebra.Count; i++)
                         {
-                            if (Convert.ToInt32(button.Content) == i[0])
-                            {
-                                button.Background = new SolidColorBrush(System.Windows.Media.Color.FromArgb(100, 0, 130, 255));
-                            }
-                            else if (Convert.ToInt32(button.Content) == i[1])
-                            {
-                                button.Background = new SolidColorBrush(System.Windows.Media.Color.FromArgb(100, 0, 130, 255));
-
-                            }
-                        }*/
-
+                            NoBridgeRebraText += graf.m_mpNoBridgeRebra[i].first + "-" + graf.m_mpNoBridgeRebra[i].second + " ";
+                        }
                         foreach (Line line in canvas.Children.OfType<Line>().ToList())
                         {
                             MyPair da = line.DataContext as MyPair;
                             if ((myPair1.first == da.first) && (myPair1.second == da.second))
                             {
                                 line.Stroke = new SolidColorBrush(System.Windows.Media.Color.FromArgb(200, 0, 255, 255));
+                                info.Text = "";
+                                info.Text = $"Мы вернулись к вершине {myPair1.second}, значит в неё можно вернуться не одним путём. Таким обрзом рёбра на нашем пути ({NoBridgeRebraText}) НЕ ЯВЛЯЮТСЯ МОСТАМИ.";
+                                textHistroy.Add($"Мы вернулись к вершине {myPair1.second}, значит в неё можно вернуться не одним путём. Таким обрзом рёбра на нашем пути ({NoBridgeRebraText}) НЕ ЯВЛЯЮТСЯ МОСТАМИ.");
                                 break;
                             }
                             MyPair tmp = new MyPair();
@@ -325,9 +315,11 @@ namespace FiindBrigeInGraf
                             if ((myPair1.second == da.first) && (myPair1.first == da.second))
                             {
                                 line.Stroke = new SolidColorBrush(System.Windows.Media.Color.FromArgb(200, 0, 255, 255));
+                                info.Text = "";
+                                info.Text = $"Мы вернулись к вершине {myPair1.second}, значит в неё можно вернуться не одним путём. Таким обрзом рёбра на нашем пути ({NoBridgeRebraText}) НЕ ЯВЛЯЮТСЯ МОСТАМИ.";
+                                textHistroy.Add($"Мы вернулись к вершине {myPair1.second}, значит в неё можно вернуться не одним путём. Таким обрзом рёбра на нашем пути ({NoBridgeRebraText}) НЕ ЯВЛЯЮТСЯ МОСТАМИ.");
                                 break;
                             }
-
                         }
                     }
 
@@ -339,6 +331,9 @@ namespace FiindBrigeInGraf
                         if ((myPair.first == da.first) && (myPair.second == da.second))
                         {
                             line.Stroke = new SolidColorBrush(System.Windows.Media.Color.FromArgb(200, 255, 0, 0));
+                            info.Text = "";
+                            info.Text = $"В вершину {myPair.first} ведёт путь только чреез вершину {da.second}.";
+                            textHistroy.Add($"В вершину {myPair.first} ведёт путь только чреез вершину {da.second}.");
                             break;
                         }
                         MyPair tmp = new MyPair();
@@ -346,14 +341,33 @@ namespace FiindBrigeInGraf
                         if ((myPair.second == da.first) && (myPair.first == da.second))
                         {
                             line.Stroke = new SolidColorBrush(System.Windows.Media.Color.FromArgb(200, 255, 0, 0));
+                            info.Text = "";
+                            info.Text = $"В вершину {myPair.second} ведёт путь только чреез вершину {da.first}.";
+                            textHistroy.Add($"В вершину {myPair.second} ведёт путь только чреез вершину {da.first}.");
                             break;
                         }
+
 
                     }
 
                     break;
                 case Flags.END:
                     NextStep.IsEnabled = false;
+                    info.Text = "";
+                    info.Text = $"Весь граф пройден!";
+                    textHistroy.Add($"Весь граф пройден!");
+                    BackStep.IsEnabled = true;
+                    obj.IsEnabled = true;
+                    reb.IsEnabled = true;
+                    Clear.IsEnabled = true;
+                    chetchik.IsEnabled = true;
+                    incr.IsEnabled = true;
+                    decr.IsEnabled = true;
+                    buttonRandomCreate.IsEnabled = true;
+                    chetchikA.IsEnabled = true;
+                    incrA.IsEnabled = true;
+                    decrA.IsEnabled = true;
+                    buttonA.IsEnabled = true;
                     break;
             }
         }
@@ -363,8 +377,16 @@ namespace FiindBrigeInGraf
             
             h--;
             int i =0;
-            if (h >= 0)
+            if (h > 0)
             {
+                if (h< history.Count)
+                {
+                    NextStep.IsEnabled= true;
+                }
+                else
+                {
+                    NextStep.IsEnabled= false;
+                }
                 List<DataOfLine> listLineH = history[h];
                 foreach (Line line in canvas.Children.OfType<Line>().ToList())
                 {
@@ -374,21 +396,78 @@ namespace FiindBrigeInGraf
                     }
                     i++;
                 }
+                info.Text = textHistroy[h].ToString();
+
+            }
+            if (h == 0)
+            {
+                if (h < history.Count)
+                {
+                    NextStep.IsEnabled = true;
+                }
+                else
+                {
+                    NextStep.IsEnabled = false;
+                }
+                List<DataOfLine> listLineH = history[h];
+                foreach (Line line in canvas.Children.OfType<Line>().ToList())
+                {
+                    if (line.DataContext is MyPair == listLineH[i].dataContext is MyPair)
+                    {
+                        line.Stroke = listLineH[i].color;
+                    }
+                    i++;
+                }
+                info.Text = textHistroy[h].ToString();
+                BackStep.IsEnabled = false;
             }
            
         }
         private void NextStep_Click(object sender, RoutedEventArgs e)
-        {   
+        {
+           
             if (flag != Flags.END)
             {
+                obj.IsEnabled = false;
+                reb.IsEnabled = false;
+                Clear.IsEnabled = false;
+                chetchik.IsEnabled = false;
+                incr.IsEnabled = false;
+                decr.IsEnabled = false;
+                buttonRandomCreate.IsEnabled = false;
+                chetchikA.IsEnabled = false;
+                incrA.IsEnabled = false;
+                decrA.IsEnabled = false;
+                buttonA.IsEnabled = false;
                 flag = GrafProhd();
             }
             else
             {
-                BackStep.IsEnabled = true;
+                
                 int i = 0;
                 h++;
-                if (h <=history.Count())
+                if (h <history.Count()-1)
+                {
+                    if (h == 0)
+                    {
+                        BackStep.IsEnabled = false;
+                    }
+                    else
+                    {
+                        BackStep.IsEnabled = true;
+                    }
+                    List<DataOfLine> listLineH = history[h];
+                    foreach (Line line in canvas.Children.OfType<Line>().ToList())
+                    {
+                        if (line.DataContext is MyPair == listLineH[i].dataContext is MyPair)
+                        {
+                            line.Stroke = listLineH[i].color;
+                        }
+                        i++;
+                    }
+                    info.Text = textHistroy[h].ToString();
+                }
+                else if (h == history.Count()-1)
                 {
                     List<DataOfLine> listLineH = history[h];
                     foreach (Line line in canvas.Children.OfType<Line>().ToList())
@@ -399,9 +478,14 @@ namespace FiindBrigeInGraf
                         }
                         i++;
                     }
+                    info.Text = textHistroy[h].ToString();
+                    NextStep.IsEnabled = false;
                 }
+
+
             }
-            
+
+
         }
 
         public Flags GrafProhd()
@@ -423,8 +507,6 @@ namespace FiindBrigeInGraf
             da++;
             Flags flag = graf.NextStep();
             ChangeColor(flag, canvas);
-            info.Text = flag.ToString();
-
             return flag;
 
         }
@@ -524,10 +606,3 @@ namespace FiindBrigeInGraf
         }
     }
 }
-
-/* * * * * * * * * * * * * * * * *
- * Создвать линии за кнопкой     *
- *                               *
- * Механизм для шага назад       *
- *                               *
- * * * * * * * * * * * * * * * * */
