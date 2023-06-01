@@ -215,10 +215,10 @@ namespace FiindBrigeInGraf
             NextStep.IsEnabled = true;
             double[] coordsLine = new double[4];
 
-            Graf graf = new Graf();
-            Flags flag = Flags.START;
+            graf = new Graf();
+            flag = Flags.START;
 
-            int h = 0;
+            h = 0;
             history.Clear();
             textHistroy.Clear();
             BackStep.IsEnabled = false;
